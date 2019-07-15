@@ -57,7 +57,7 @@ app.get('/tasks', (req, res) => {
                 error: err
             });
         } else { // else console.log that we did well and then res.json the data
-            console.log('successfully added a new task');
+            console.log('successfully displaying all tasks');
             res.json({
                 message: 'Success',
                 data: all_tasks

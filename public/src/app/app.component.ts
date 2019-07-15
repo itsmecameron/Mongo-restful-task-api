@@ -1,21 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
+
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-    title = 'public';
+export class AppComponent implements OnInit {
+    // title = 'Task';
+    tasks = [];
+    taskDescription = [];
+    requested = false;
+
     constructor(private _httpService: HttpService) { }
-    getAllTask() {
+    ngOnInit() {
+        // this.getTasksFromService();
+    }
+
+    getTasksFromService() {
         let taskObservable = this._httpService.getTasks()
         taskObservable.subscribe(
             data => {
                 console.log('Got your tasks:', data);
-                this.tasks = data['tasks']
+                this.tasks = data.data
             }
         )
     }
-}
+
+    getTaskDescription(taskIndex) {
+        // let taskObservable = this._httpService.getDescription(taskIndex)
+        // taskObservable.subscribe(
+            // data => {
+                this.taskDescription = this.tasks[taskIndex];
+                console.log(this.taskDescription);
+
+                this.requested = true;
+                console.log("It's true!")
+            }
+            return 
+        // )
+    }
+// }

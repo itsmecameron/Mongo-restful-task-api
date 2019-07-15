@@ -1,24 +1,39 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="root">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<div style="text-align:center">
+<div class="root container col-6">
+  <!-- <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
+</div> -->
+  <div class="text-center">
+    <h2>Restful Task API </h2>
+  </div>
+  <div>
+    <h1 class="text-center">All the task:</h1>
+    <button class="btn btn-primary " (click)="getTasksFromService()">Click to show all Tasks</button>
 
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-<router-outlet></router-outlet>
+    <div *ngFor="let task of tasks; let taskIndex = index">
+      <div class="row justify-content-center mt-3">
+        <div class="col-8">
+          <p class="h4 mr-4">{{task.title}}</p>
+          <button class="btn btn-primary" (click)="getTaskDescription(taskIndex)">Show description</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+        
+    </div>
+
+    <div *ngIf="true">
+      <p class="pt-5">{{ taskDescription.title }}</p>
+      <p>{{ taskDescription.description }}</p>
+      <p class="pb-4">{{ taskDescription.createdAt }}</p>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
 </div>
