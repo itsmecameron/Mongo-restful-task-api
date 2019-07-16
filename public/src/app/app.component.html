@@ -12,27 +12,26 @@
   <div class="text-center">
     <h2>Restful Task API </h2>
   </div>
-  <div>
-    <h1 class="text-center">All the task:</h1>
-    <button class="btn btn-primary " (click)="getTasksFromService()">Click to show all Tasks</button>
-
-    <div *ngFor="let task of tasks; let taskIndex = index">
-      <div class="row justify-content-center mt-3">
-        <div class="col-8">
-          <p class="h4 mr-4">{{task.title}}</p>
-          <button class="btn btn-primary" (click)="getTaskDescription(taskIndex)">Show description</button>
+  <div class="container">
+    <div class="text-center show_task">
+      <!-- <h1 class="text-center">All the task:</h1> -->
+      <button class="btn btn-primary" (click)="getTasksFromService()">Click to show all Tasks</button>
+      <div *ngFor="let task of tasks; let id = index">
+        <div class="row justify-content-center mt-3">
+          <div class="col-8 text-center">
+            <p class="h4 mr-4">{{task.title}}</p>
+            <button class="btn btn-primary" (click)="getTaskDescription(id)">Show description</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-4">
-        
-    </div>
-
-    <div *ngIf="true">
+    <div *ngIf="requested" class="display_task mt-3">
       <p class="pt-5">{{ taskDescription.title }}</p>
       <p>{{ taskDescription.description }}</p>
       <p class="pb-4">{{ taskDescription.createdAt }}</p>
     </div>
+
+
   </div>
 
   <router-outlet></router-outlet>

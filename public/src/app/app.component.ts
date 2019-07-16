@@ -28,17 +28,16 @@ export class AppComponent implements OnInit {
         )
     }
 
-    getTaskDescription(taskIndex) {
-        // let taskObservable = this._httpService.getDescription(taskIndex)
+    getTaskDescription(id) {
+        // let taskObservable = this._httpService.getDescription(id)
         // taskObservable.subscribe(
             // data => {
-                this.taskDescription = this.tasks[taskIndex];
+                this.taskDescription = this.tasks[id];
                 console.log(this.taskDescription);
 
                 this.requested = true;
                 console.log("It's true!")
             }
-            return 
         // )
     }
 // }
