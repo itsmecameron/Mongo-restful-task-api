@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<div class="root container col-6">
+<div class="root container ">
   <!-- <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
@@ -12,27 +12,58 @@
   <div class="text-center">
     <h2>Restful Task API </h2>
   </div>
-  <div class="container">
-    <div class="text-center show_task">
-      <!-- <h1 class="text-center">All the task:</h1> -->
-      <button class="btn btn-primary" (click)="getTasksFromService()">Click to show all Tasks</button>
-      <div *ngFor="let task of tasks; let id = index">
-        <div class="row justify-content-center mt-3">
-          <div class="col-8 text-center">
-            <p class="h4 mr-4">{{task.title}}</p>
-            <button class="btn btn-primary" (click)="getTaskDescription(id)">Show description</button>
-          </div>
+  <div class="text-center show_task">
+    <!-- <h1 class="text-center">All the task:</h1> -->
+    <button class="btn btn-primary" (click)="getTasksFromService()">Click to show all Tasks</button>
+    <div *ngFor="let task of tasks">
+      <div class="row justify-content-center mt-3 inline-block">
+        <div class=" text-center">
+          <p class="h4 mr-4 inline-block">{{task.title}} </p>
+          <button class="btn btn-primary inline-block" (click)="getTaskDescription(task._id)">Show description</button>
+          <button class="btn btn-primary inline-block" (click)="showEditTask(task)">Edit</button>
+          <button class="btn btn-primary inline-block" (click)="deleteTask(task._id)">Delete</button>
         </div>
       </div>
     </div>
-    <div *ngIf="requested" class="display_task mt-3">
-      <p class="pt-5">{{ taskDescription.title }}</p>
-      <p>{{ taskDescription.description }}</p>
-      <p class="pb-4">{{ taskDescription.createdAt }}</p>
-    </div>
-
-
+  </div>
+  <div *ngIf="requested" class="display_task mt-3 text-center">
+    <p class="pt-5">{{ taskDescription.title }}</p>
+    <p>{{ taskDescription.description }}</p>
+    <p class="pb-4">{{ taskDescription.createdAt }}</p>
   </div>
 
-  <router-outlet></router-outlet>
+  <div *ngIf="edit">
+    <form (submit)="onEdit()">
+      <div class="form-group">
+        <p>Edit Task</p>
+        <label> Task title:
+          <input type="text" name="editTask.title" [(ngModel)]="editTask.title " value="{{editTaskid.title}}" />
+        </label>
+      </div>
+      <div class="form-group">
+        <label> Task Description:
+          <input type="text" name="editTask.description" [(ngModel)]="editTask.description"
+            value="{{editTaskid.description}}" />
+        </label>
+      </div>
+      <input type="submit" value="Edit Task" />
+    </form>
+  </div>
+
+  <form class="text-center" (submit)="onSubmit()">
+    <!-- use the json pipe to see how newTask changes in real time -->
+    <p class="text-center"> {{ newTask | json }} </p>
+
+    <label>Task title:
+      <input type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+    </label>
+
+    <label>Task description:
+      <input type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+    </label>
+
+    <input type="submit" value="Create Task" />
+  </form>
 </div>
+
+<router-outlet></router-outlet>

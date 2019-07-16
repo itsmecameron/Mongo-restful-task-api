@@ -13,7 +13,19 @@ export class HttpService {
         return this._http.get('/tasks');
     }
 
-    // getDescription(id: string) {
-    //     return this._http.post('/tasks/:id');
-    // }
+    addTask(newTask) {
+        return this._http.post('/tasks', newTask)
+    }
+
+    getDescription(id) {
+        return this._http.get('/tasks/' + id);
+    }
+
+    deleteTask(id) {
+        return this._http.delete('/tasks/' + id)
+    }
+
+    editTask(editTask) {
+        return this._http.put('/tasks/' + editTask.id, editTask)
+    }
 }

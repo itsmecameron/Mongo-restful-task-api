@@ -108,8 +108,8 @@ app.delete('/tasks/:id', (req, res) => {
 
 app.get('/tasks/:id', (req, res) => {
     Task.findOne({
-        title: req.params.id
-    }, (err) => {
+        _id: req.params.id
+    }, (err,task) => {
         if (err) {
             console.log('You werent able to find task', err);
             res.json({
@@ -127,7 +127,8 @@ app.get('/tasks/:id', (req, res) => {
 });
 
 app.put('/tasks/:id', (req, res) => {
-    Task.findOneAndUpdate({ _id: req.params.id
+    Task.findOneAndUpdate({ 
+        _id: req.params.id
     }, req.body, (err, task) => {
         if (err) {
             console.log('You werent able to find task', err);
