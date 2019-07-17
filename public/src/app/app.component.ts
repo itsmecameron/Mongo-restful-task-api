@@ -59,10 +59,12 @@ export class AppComponent implements OnInit {
         })
         this.getTasksFromService();
     }
+
     onEdit() {
         let observable = this._httpService.editTask(this.editTask);
         observable.subscribe(data => {
             this.getTasksFromService();
+            // this.newTask = { title: "", description: "" }
             this.edit = false;
         })
     }

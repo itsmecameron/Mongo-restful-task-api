@@ -19,31 +19,37 @@
       <div class="row justify-content-center mt-3 inline-block">
         <div class=" text-center">
           <p class="h4 mr-4 inline-block">{{task.title}} </p>
+          
           <button class="btn btn-primary inline-block" (click)="getTaskDescription(task._id)">Show description</button>
+          
           <button class="btn btn-primary inline-block" (click)="showEditTask(task)">Edit</button>
+
           <button class="btn btn-primary inline-block" (click)="deleteTask(task._id)">Delete</button>
+
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="requested" class="display_task mt-3 text-center">
-    <p class="pt-5">{{ taskDescription.title }}</p>
-    <p>{{ taskDescription.description }}</p>
-    <p class="pb-4">{{ taskDescription.createdAt }}</p>
-  </div>
+  <app-task *ngIf="requested" [taskToShow] = 'taskDescription'></app-task>
+
+  <!-- <div *ngIf="requested" class="display_task mt-3 text-center">
+        <p class="pt-5">{{ taskDescription.title }}</p>
+        <p>{{ taskDescription.description }}</p>
+        <p class="pb-4">{{ taskDescription.createdAt }}</p>
+  </div> -->
 
   <div *ngIf="edit">
     <form (submit)="onEdit()">
       <div class="form-group">
         <p>Edit Task</p>
         <label> Task title:
-          <input type="text" name="editTask.title" [(ngModel)]="editTask.title " value="{{editTaskid.title}}" />
+          <input type="text" name="editTask.title" [(ngModel)]="editTask.title " value="{{editTask.title}}" />
         </label>
       </div>
       <div class="form-group">
         <label> Task Description:
           <input type="text" name="editTask.description" [(ngModel)]="editTask.description"
-            value="{{editTaskid.description}}" />
+            value="{{editTask.description}}" />
         </label>
       </div>
       <input type="submit" value="Edit Task" />
